@@ -25,6 +25,9 @@ pre {
 a {
   background-color: transparent;
 }
+ul,ol{
+  list-style:none;
+}
 abbr[title] {
   border-bottom: none;
   text-decoration: underline;
@@ -407,4 +410,9 @@ code {
 .OrderPage main .Card:last-child {
   margin-bottom: 0;
 }
+nav ul {
+  padding-left:0;
+  display:flex;
+}
+
 /*# sourceMappingURL=main.e9124b97.css.map*/
