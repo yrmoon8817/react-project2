@@ -1,10 +1,11 @@
 {
-  "name": "lecture-react-season2",
+  "name": "react2",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "1-react": "npm start --workspace 1-react",
+    "1-react-study": "npm start --workspace 1-react-study",
     "2-hook": "npm start --workspace 2-hook"
   },
   "keywords": [],
@@ -17,6 +18,7 @@
   "engineStrict": true,
   "workspaces": [
     "1-react",
+    "1-react-study",
     "2-hook",
     "shared"
   ],
