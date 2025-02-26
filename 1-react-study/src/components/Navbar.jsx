@@ -5,7 +5,7 @@ export default function Navbar({list}) {
     <nav className="Navbar">
       <ul>
         {
-          list.map((item)=><li><a href="#" className={classText}>{item}</a></li>)
+          list.map((item, idx)=><li key={idx}><a href="#" className={item.state}>{item.name}</a></li>)
         }
       </ul>
     </nav>
