@@ -1,14 +1,16 @@
-import React from 'react';
+import * as MyRouter from "../lib/MyRouter";
 
-export default function Navbar({list}) {
+const Navbar = () =>{
   return (
     <nav className="Navbar">
-      <ul>
-        {
-          list.map((item, idx)=><li key={idx}><a href="#" className={item.state}>{item.name}</a></li>)
-        }
-      </ul>
+      <MyRouter.Link className="active" to="/">
+        메뉴목록
+      </MyRouter.Link>
+      <MyRouter.Link to="/order">
+        주문내역
+      </MyRouter.Link>
     </nav>
   )
 }
 
+export default Navbar;
