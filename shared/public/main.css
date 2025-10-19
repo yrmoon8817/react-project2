@@ -329,12 +329,15 @@ code {
 }
 .ProductItem .description {
   flex: 1 1;
+  display:inline-flex;
+  flex-direction: column;
 }
 .ProductItem .description > h2 {
   margin: 0;
 }
 .ProductItem .description > button {
   margin-top: 8px;
+  max-width:150px;
 }
 .ProductItem .thumbnail {
   margin-left: 8px;
