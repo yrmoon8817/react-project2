@@ -4,6 +4,7 @@ import OrderPage from "./pages/OrderPage";
 import ProductPage from "./pages/ProductPage";
 import CartPage from "./pages/CartPage";
 import * as MyRouter from "./lib/MyRouter";
+import { getComponentName } from "./lib/utils";
 
 
 
@@ -18,7 +19,45 @@ const App = () =>(
 ) 
 
 export default App;
+// class Header extends React.Component {
+//   render(){
+//     return <header>Header</header>
+//   }
+// }
+// class Button extends React.Component {
+//   handleClick = ()=>{
+//     this.props.log('클릭!!');
+//   }
+//   render(){
+//     return <button onClick={this.handleClick}>버튼</button>;
+//   }
+// }
+// const withLogging = WrappedComponent => {
+//   function log(message) {
+//     console.log(`[${getComponentName(WrappedComponent)}] ${message}`);
+//   }
+//   class WithLogging extends React.Component {
+//     render(){
+//       const enhanceProps = {
+//         log,
+//       }
+//       return <WrappedComponent {...this.props} {...enhanceProps} />
+//     }
+//     componentDidMount(){
+//       log('마운트');
+//     }
+//   }
+//   return WithLogging;
+// }
 
+// const EnhancedHeader = withLogging(Header);
+// const EnhancedButton = withLogging(Button);
+// export default () =>(
+//   <>
+//     <EnhancedHeader/>
+//     <EnhancedButton/>
+//   </>
+// );
 /* 이벤트 에미터 실습 */
 // const eventEmitter = createEventEmitter(0);
 // const logger = value => console.log(value);

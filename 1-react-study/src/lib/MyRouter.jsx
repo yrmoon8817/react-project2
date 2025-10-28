@@ -1,7 +1,5 @@
 import React from "react";
-import CartPage from "../pages/CartPage";
-import OrderPage from "../pages/OrderPage";
-import ProductPage from "../pages/ProductPage";
+import { getComponentName } from "./utils";
 export const routerContext = React.createContext({});
 routerContext.displayName='RouterContext'
 
@@ -77,3 +75,33 @@ export const Routes = ({children}) =>{
 )
 }
 export const Route = ()=>null;
+
+// 고차 컴포넌트
+export const withRouter = (WrappedComponent) => {
+  const WithRouter = (props) => (
+    <routerContext.Consumer>
+      {({path, changePath})=>{
+        const navigate = (nextPath) => {
+          if(path !== nextPath) changePath(nextPath);
+        }
+        const match = comparedPath => path === comparedPath;
+        const params = () =>{
+          const params = new URLSearchParams(window.location.search);
+          const paramsObject = {}
+          for(const [key,value] of params){
+            paramsObject[key] = value;
+          }
+          return paramsObject;
+        }
+        const enhancedProps = {
+          navigate,
+          match,
+          params
+        }
+        return <WrappedComponent {...props} {...enhancedProps}/>
+      }}
+    </routerContext.Consumer>
+  );
+  WithRouter.displayName = `WithRouter(${getComponentName(WrappedComponent)})`
+  return WithRouter;
+}
