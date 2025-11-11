@@ -2,11 +2,13 @@ import React from 'react';
 import Page from '../../components/Page';
 import Title from '../../components/Title';
 import Navbar from '../../components/Navbar';
+import * as MyLayout from "../../lib/MyLayout";
 import ProductItem from '../../components/ProductItem';
 import ProductApi from 'shared/api/ProductApi';
 import OrderableProductItem from './OrderableProductItem';
+import Dialog from '../../components/Dialog';
 
-export default class ProductPage extends React.Component {
+class ProductPage extends React.Component {
   constructor(props){
     super(props);
     this.state={
@@ -14,9 +16,13 @@ export default class ProductPage extends React.Component {
     }
   }
   async fetch(){
+    const {startLoading, finishLoading} = this.props;
+    startLoading('메뉴 목록 로딩중...');
     try{
       const productList = await ProductApi.fetchProductList();
       this.setState({productList})
+      finishLoading()
+
     }catch(e){
       console.error(e);
     }
@@ -42,3 +48,4 @@ export default class ProductPage extends React.Component {
   }
 }
 
+export default MyLayout.withLayout(ProductPage);

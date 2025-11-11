@@ -6,6 +6,7 @@ import ProductItem from "../../components/ProductItem";
 import Title from "../../components/Title";
 import OrderForm from "./OrderForm";
 import PaymentButton from "./PaymentButton";
+import * as MyLayout from "../../lib/MyLayout";
 
 
 class CartPage extends React.Component{
@@ -15,18 +16,19 @@ class CartPage extends React.Component{
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   async fetch(){
-    const {productId}= this.props.params();
+    const {params, startLoading, finishLoading}= this.props;
+    const {productId} = params();
     // 주소가 없는 경우
     if(!productId) return;
-
+    startLoading('장바구니에 담는 중...');
     try{
       const product = await ProductApi.fetchProduct(productId);
       this.setState({product})
+      finishLoading()
     }catch(e){
       console.error(e);
     }
   }
-  
   handleSubmit(values) {
     console.log(values);
 
@@ -51,4 +53,4 @@ class CartPage extends React.Component{
     </div>)
   }
 }
-export default MyRouter.withRouter(CartPage);
+export default MyLayout.withLayout(MyRouter.withRouter(CartPage));
