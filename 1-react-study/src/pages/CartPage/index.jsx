@@ -1,12 +1,15 @@
 import React from "react";
 import * as MyRouter from "../../lib/MyRouter"
 import ProductApi from "shared/api/ProductApi";
+import OrderApi from "shared/api/OrderApi";
 import Page from "../../components/Page"
 import ProductItem from "../../components/ProductItem";
 import Title from "../../components/Title";
 import OrderForm from "./OrderForm";
 import PaymentButton from "./PaymentButton";
 import * as MyLayout from "../../lib/MyLayout";
+import ErrorDialog from "../../components/ErrorDialog";
+import PaymentSuccessDialog from "./PaymentSuccessDialog";
 
 
 class CartPage extends React.Component{
@@ -26,14 +29,23 @@ class CartPage extends React.Component{
       this.setState({product})
       finishLoading()
     }catch(e){
-      console.error(e);
+      openDialog(<ErrorDialog/>);
+      return     
     }
   }
-  handleSubmit(values) {
-    console.log(values);
-
+  async handleSubmit(values) {
+    const {startLoading, finishLoading, openDialog} = this.props;
+    startLoading('결제중...')
+    try { 
+      await OrderApi.createOrder(values);
+    }catch(e) {
+      openDialog(<ErrorDialog/>)
+      return;
+    }
+    finishLoading();
     // TODO : 결제 성공후
-    this.props.navigate('/order')
+    openDialog(<PaymentSuccessDialog/>)
+    // this.props.navigate('/order')
   }  
   componentDidMount(){
     this.fetch();

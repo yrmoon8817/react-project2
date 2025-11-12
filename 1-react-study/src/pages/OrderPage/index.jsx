@@ -23,7 +23,8 @@ class OrderPage extends React.Component{
       this.setState({order});
       finishLoading();
     }catch(e) {
-      console.error(e);
+      openDialog(<ErrorDialog/>);
+      return      
     }
   }
   componentDidMount(){

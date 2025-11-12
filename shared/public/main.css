@@ -259,7 +259,7 @@ code {
   flex: 1 1;
   max-height: 200px;
   min-height: 40px;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 .Dialog > footer {
   padding-top: 1rem;
